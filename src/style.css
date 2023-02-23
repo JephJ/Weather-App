@@ -37,7 +37,7 @@ li:first-letter {
 .overview {
   margin-bottom: 20px;
 }
-.weather-temperature img {
+.weather-temp img {
   margin-right: 5px;
   height: 64px;
   width: 64px;
@@ -47,4 +47,9 @@ li:first-letter {
   font-size: 64px;
   line-height: 1;
   font-weight: 400;
+}
+.weather-temp .units {
+  position: relative;
+  font-size: 16px;
+  top: -34px;
 }

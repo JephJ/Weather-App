@@ -20,6 +20,23 @@ function formatDate(timestamp) {
   let day = days[date.getDay()];
   return `${day} ${hours} :${minutes}`;
 }
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHtml = "";
+  forecastElement.innerHTML = `<div class="row">
+        <div class="col-2">
+          <div class="weather-forecast-date"></div>
+          Thu
+          <img src="https://cdn.windy.app/site-storage/posts/February2023/02-weather-symbol-partly-cloudy-windyapp1.jpg" alt=""  
+          width = "42"
+          />
+          <div class="weather-forecast-temperature">
+            <span class="weather-forecast-temperature-max">15°</span>
+          <span class="weather-forecast-temperature-min">12°</span>
+          </div>
+        </div>
+        </div>`;
+}
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
@@ -80,3 +97,4 @@ fahrenheitLink.addEventListener("click", displayFTemp);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCTemp);
 search("New York");
+displayForecast();

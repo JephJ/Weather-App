@@ -20,22 +20,36 @@ function formatDate(timestamp) {
   let day = days[date.getDay()];
   return `${day} ${hours} :${minutes}`;
 }
-function displayForecast() {
+function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
-  let forecastHtml = "";
-  forecastElement.innerHTML = `<div class="row">
-        <div class="col-2">
-          <div class="weather-forecast-date"></div>
-          Thu
-          <img src="https://cdn.windy.app/site-storage/posts/February2023/02-weather-symbol-partly-cloudy-windyapp1.jpg" alt=""  
-          width = "42"
-          />
-          <div class="weather-forecast-temperature">
-            <span class="weather-forecast-temperature-max">15°</span>
-          <span class="weather-forecast-temperature-min">12°</span>
-          </div>
+  let forecastHtml = `<div class = "row" >`;
+  let days = ["Mon", "Tue ", "Wed", "Thur", "Fri", "Sat"];
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+      <div class="col-2">
+        <div class="weather-forecast-date">${day}</div>
+        <img src="https://cdn.windy.app/site-storage/posts/February2023/02-weather-symbol-partly-cloudy-windyapp1.jpg" alt=""  
+          width = "30"
+        />
+        <div class="weather-forecast-temperatures">
+          <span class="weather-forecast-temperature-max"> 18° </span>
+          <span class="weather-forecast-temperature-min"> 12° </span>
         </div>
-        </div>`;
+      </div>
+  `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "2ff29bed3181c3526c35cc5408037f85";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
@@ -97,4 +111,3 @@ fahrenheitLink.addEventListener("click", displayFTemp);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCTemp);
 search("New York");
-displayForecast();
